@@ -7,9 +7,9 @@ measurements taken directly from tumours.
 
 ## Usage
 
-1. Change directory to the dnn module:
+1. Change directory:
     ```
-    $ cd dnn_data_classifier
+    $ cd cancer_classification
     ```
 
 2. Run the application:
@@ -19,7 +19,7 @@ measurements taken directly from tumours.
 
 3. Any existing model will be removed and a new model will be trained.
 The parameters for training (epochs, steps, model directory, etc) can be
-altered in dnn_data_classifier/main.py. The expected output should be:
+altered in cancer_classification/main.py. The expected output should be:
     ```
     Deleting resource: Model directory [nn_classifier].
     Removed resource: Model directory [nn_classifier].

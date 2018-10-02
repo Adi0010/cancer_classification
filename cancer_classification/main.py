@@ -8,7 +8,7 @@ from urllib.request import urlopen
 
 
 def clean_run(model_dir='', source_data=''):
-    """Remove model and data files for a clean run"""
+   # """Remove model and data files for a clean run"""
 
     if model_dir:
         if os.path.exists(model_dir):
@@ -25,7 +25,7 @@ def clean_run(model_dir='', source_data=''):
 
 
 def download_data(data_file, url):
-    """Download data if not present on local FileSystem"""
+    #"""Download data if not present on local FileSystem"""
 
     download_url = url + data_file
 
@@ -42,7 +42,7 @@ def download_data(data_file, url):
 
 
 def process_source(local_data, col_names, missing_vals='', drop_cols=[]):
-    """Clean data of missing vals and irrelevant cols."""
+    #"""Clean data of missing vals and irrelevant cols."""
 
     dataframe = pd.read_csv(local_data, names=col_names)
     dataframe.replace(missing_vals, np.nan, inplace=True)
@@ -53,7 +53,7 @@ def process_source(local_data, col_names, missing_vals='', drop_cols=[]):
 
 
 def replace_classification_labels(dataframe, result_col='', values_to_replace=[]):
-    """Replace default classifications by numerical/binary result."""
+    #"""Replace default classifications by numerical/binary result."""
 
     target_labels = [x for x in range(0, len(values_to_replace))]
     dataframe[result_col].replace(values_to_replace, target_labels, inplace=True)
@@ -62,7 +62,7 @@ def replace_classification_labels(dataframe, result_col='', values_to_replace=[]
 
 
 def split_sets(dataframe_all):
-    """Split dataset 80:20 into training and test datasets."""
+    #"""Split dataset 80:20 into training and test datasets."""
 
     train_set, test_set = train_test_split(dataframe_all, test_size=0.2, random_state=0)
 
@@ -73,7 +73,7 @@ def split_sets(dataframe_all):
 
 
 def load_tensor_data(dataset):
-    """Load dataset into tensorflow contrib.learn.dataset"""
+    #"""Load dataset into tensorflow contrib.learn.dataset"""
 
     return tf.contrib.learn.datasets.base.load_csv_without_header(
                 filename=dataset,
@@ -83,7 +83,7 @@ def load_tensor_data(dataset):
 
 
 def get_inputs(data_set):
-    """Define inputs for tensor input_fn"""
+    #"""Define inputs for tensor input_fn"""
 
     data = tf.constant(data_set.data)
     target = tf.constant(data_set.target)
@@ -92,7 +92,7 @@ def get_inputs(data_set):
 
 
 def construct_net(num_features, model_dir):
-    """Constructs a 3 layer Deep Neural Net with 10, 20, 10 units"""
+    #"""Constructs a 3 layer Deep Neural Net with 10, 20, 10 units"""
 
     feature_cols = [tf.contrib.layers.real_valued_column("", dimension=num_features)]
 
@@ -105,21 +105,21 @@ def construct_net(num_features, model_dir):
 
 
 def fit_model(model, train_data, steps):
-    """Fit model with custom input function"""
+    #"""Fit model with custom input function"""
 
     model.fit(input_fn=lambda: get_inputs(train_data), steps=steps)
     print("\nModel trained after %s steps." % steps)
 
 
 def evaluate_model(model, test_data, steps):
-    """Evaluate model with custom input function"""
+    #"""Evaluate model with custom input function"""
 
     accuracy_score = model.evaluate(input_fn=lambda: get_inputs(test_data), steps=steps)["accuracy"]
     print("\nModel Accuracy: {0:f}\n".format(accuracy_score))
 
 
 def new_samples(feature_names):
-    """Input new samples for classification"""
+    #"""Input new samples for classification"""
 
     request_input = 0
 
@@ -139,7 +139,7 @@ def new_samples(feature_names):
 
 
 def predict_class(model, binary_mappings):
-    """Predict classification for new data"""
+    #"""Predict classification for new data"""
 
     predict_loop = 'Y'
 
